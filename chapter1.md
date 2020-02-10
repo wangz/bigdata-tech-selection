@@ -61,7 +61,7 @@ Mesa是一个分布式、多副本的、高可用的数据处理、存储和查�
 
 
 # 参考：
-[1]: https://cloud.tencent.com/developer/news/405232 "Gartner 2019排名：Greenplum跃居第三"
+[Gartner 2019排名：Greenplum跃居第三](https://cloud.tencent.com/developer/news/405232)
 
 [2]: http://neoremind.com/2017/09/%E6%B5%85%E8%B0%88%E4%BB%8Egoogle-mesa%E5%88%B0%E7%99%BE%E5%BA%A6palo/ "浅谈从Google Mesa到百度PALO"
 
