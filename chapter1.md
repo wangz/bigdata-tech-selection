@@ -38,7 +38,7 @@ Kudu是cloudera开源的运行在hadoop平台上的列式存储系统（fast ana
 基于Spark+GemFire的组合实现的一个统一的OLTP+OLAP+流式写入的内存分布式数据库，Spark能适配的存储，它都可以适配支持，通过缓存到内存来提速。某些增强功能（如近似计算等）由商用版提供。
 
 ## Druid
-OLAP数据库+时序支持，支持高频insert,摄入数据分Timestamp、Dimensions、Metrics三部分，按时间粒度给数据做预聚合,维度不爆炸（对比kylin）。索引使用bitmap，速度快。数据存储在Deep Storage（永久）,并加载到Historicals，可理解为冷数据和热数据，可以适配各种后端存储。	
+OLAP数据库+时序支持，支持高频insert,摄入数据分Timestamp、Dimensions、Metrics三部分，按时间粒度给数据做预聚合,维度不爆炸（对比kylin）。索引使用bitmap，速度快。数据存储在Deep Storage（永久）,并加载到Historicals，可理解为冷数据和热数据，可以适配各种后端存储。自带可视化图形界面，这个比较赞。
 				
 ## Presto
 纯内存计算的OLAP引擎，原HIVE的团队搞的，HIVE依赖的MR太慢了，所以又搞了个Presto，通过并行的内存计算去提速，本身不存数据。用于做数据仓库和OLAP。TeraData support
@@ -52,16 +52,16 @@ Mesa是一个分布式、多副本的、高可用的数据处理、存储和查�
 2010年第一个版本，2012成立公司运营。目前Elasticsearch是最受欢迎的企业搜索引擎，其次是Apache Solr，也是基于Lucene。用于实时检索。看家本事是通过倒排索引支撑的全文检索
 
 ## Parquet
-  基于Google Dremel 实现的一种精巧的列式存储格式。核心思想是使用“分片和聚合算法”来标示嵌套类型数据。支持多种查询引擎和计算框架，能够平滑转换多种数据模型（如Avro, Thrift..等）。聚合算法的核心是分r、d值，代表Repetition level 和 definition level。R标示发生了重复的字段的level，D:optional 或者 repeated可以不存在，但若实际存在则D值+1。通过这两个值可以使用向量机恢复数据结构。
+基于Google Dremel 实现的一种精巧的列式存储格式。核心思想是使用“分片和聚合算法”来标示嵌套类型数据。支持多种查询引擎和计算框架，能够平滑转换多种数据模型（如Avro, Thrift..等）。聚合算法的核心是分r、d值，代表Repetition level 和 definition level。R标示发生了重复的字段的level，D:optional 或者 repeated可以不存在，但若实际存在则D值+1。通过这两个值可以使用向量机恢复数据结构。
 
 ## carbonData
 华为开源的一种用于交互查询的indexed列存。通过建立多级索引，来支持多维OLAP和点查询。支持物化视图。使用上建议根据列值特点来定义良好的索引维度，避免出现强distinct值带来的负面结果。与SPARK集成更平滑，但仍然要注意使用多种后端存储格式可能带来的工作量。
 
 ## MongoDb
-  MongoDb是一种NoSQL文档型数据库，基本概念是数据库、集合、文档。文档是一个键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别。支持固定大小的collection。支持MapReduce、聚合、分片与副本。MongoDb生态不断完善，在数据库排名中不断升高，被各大互联网公司追捧。
+MongoDb是一种开源NoSQL文档型数据库，基本概念是数据库、集合、文档。文档是一个键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别。支持固定大小的collection。支持MapReduce、聚合、分片与副本。MongoDb生态不断完善，在数据库排名中不断升高，被各大互联网公司追捧。商业公司10gen提供MongoDB支持，2009 年 2 月 10gen 正式开源了 MongoDB 的第一个版本，后该公司改名为MongoDB，商业版提供加密、LDAP和Kerberos集成等更为完善的功能支持。
 
 ## Cassandra
-todo
+Apache Cassandra是一套开源NoSQL数据库系统。最初由facebook开发之后开源。使用宽列存储模型，类似于HBase,但它不需要存储在HDFS上，而是直接存本地，结合内存和磁盘来进行读写。写入性能大于读性能。从[Benchmark测试结果](https://academy.datastax.com/planet-cassandra//nosql-performance-benchmarks/)来看整体性能优于HBase。
 
 # 参考：
 
@@ -77,6 +77,8 @@ todo
 
 [有了HBase为什么还要Kudu？][6]
 
+[MongoDB 上市后，带你认识这款非同一般的文档数据库][7]
+
 
 [1]: https://cloud.tencent.com/developer/news/405232 "Gartner 2019排名：Greenplum跃居第三"
 
@@ -89,6 +91,8 @@ todo
 [5]: https://www.w3cschool.cn/teradata/teradata_architecture.html "Teradata 架构"
 
 [6]: https://leonlibraries.github.io/2017/05/18/%E4%BB%8ELSM%E5%88%B0HBase/ "有了HBase为什么还要Kudu？"
+
+[7]: https://linux.cn/article-9006-1.html "MongoDB 上市后，带你认识这款非同一般的文档数据库"
  
 
 
