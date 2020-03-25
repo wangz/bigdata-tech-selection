@@ -34,27 +34,28 @@ Kudu是cloudera开源的运行在hadoop平台上的列式存储系统（fast ana
 ## ClickHouse
 最快开源OLAP引擎。列存+定长，更能发挥向量计算的优势。稀疏矩阵+近似计算提升响应速度，但不能用于点查。对标Vertica宣称比vertica快3到5倍,速度是HIVE的300倍。俄罗斯产，代码开源很可贵，但详细文档不够丰富。
 
-## snappyData
+## SnappyData
 基于Spark+GemFire的组合实现的一个统一的OLTP+OLAP+流式写入的内存分布式数据库，Spark能适配的存储，它都可以适配支持，通过缓存到内存来提速。某些增强功能（如近似计算等）由商用版提供。
 
 ## Druid
 OLAP数据库+时序支持，支持高频insert,摄入数据分Timestamp、Dimensions、Metrics三部分，按时间粒度给数据做预聚合,维度不爆炸（对比kylin）。索引使用bitmap，速度快。数据存储在Deep Storage（永久）,并加载到Historicals，可理解为冷数据和热数据，可以适配各种后端存储。自带可视化图形界面，这个比较赞。
 				
 ## Presto
-纯内存计算的OLAP引擎，原HIVE的团队搞的，HIVE依赖的MR太慢了，所以又搞了个Presto，通过并行的内存计算去提速，本身不存数据。用于做数据仓库和OLAP。TeraData support
+纯内存计算的OLAP引擎，FaceBook团队之前使用HIVE，但HIVE依赖的MR太慢了，所以他们又搞了个Presto，通过并行的内存计算去提速，本身不存数据。用于做数据仓库和OLAP。TeraData的团队支持过这个项目，但目前已经没有再支持了。
 
 ## Google Mesa
 Mesa是一个分布式、多副本的、高可用的数据处理、存储和查询系统，针对结构化数据。一般数据从上游服务产生（比如一个批次的spark streaming作业产生），在内部做数据的聚合和存储。支持近实时更新（与Cube方案比），数据分维度列和指标列，指标列指定聚合函数。
 
 ## Apache Doris
-前身是百度2017年开源系统PALO，后贡献给apache更名为Doris。Doris 是一个 MPP 的 OLAP 系统，主 要整合了 Google Mesa(数据模型)，Apache Impala(MPP Query Engine)和 Apache ORCFile (存储格式，编码和压缩) 的 技术。高度兼容Mysql协议。 元数据管理对impala的p2p模式做了更新，Doris 采用 Paxos 协议以及 Memory + Checkpoint + Journal 的机制来确保元数据的 高性能及高可靠 。			
+前身是百度2017年开源系统PALO，后贡献给apache更名为Doris。Doris 是一个 MPP 的 OLAP 系统，主 要整合了 Google Mesa(数据模型)，Apache Impala(MPP Query Engine)和 Apache ORCFile (存储格式，编码和压缩) 的 技术。高度兼容Mysql协议。 元数据管理对impala的p2p模式做了更新，Doris 采用 Paxos 协议以及 Memory + Checkpoint + Journal 的机制来确保元数据的 高性能及高可靠 。	
+
 ## ElasticSearch
 2010年第一个版本，2012成立公司运营。目前Elasticsearch是最受欢迎的企业搜索引擎，其次是Apache Solr，也是基于Lucene。用于实时检索。看家本事是通过倒排索引支撑的全文检索
 
 ## Parquet
 基于Google Dremel 实现的一种精巧的列式存储格式。核心思想是使用“分片和聚合算法”来标示嵌套类型数据。支持多种查询引擎和计算框架，能够平滑转换多种数据模型（如Avro, Thrift..等）。聚合算法的核心是分r、d值，代表Repetition level 和 definition level。R标示发生了重复的字段的level，D:optional 或者 repeated可以不存在，但若实际存在则D值+1。通过这两个值可以使用向量机恢复数据结构。
 
-## carbonData
+## CarbonData
 华为开源的一种用于交互查询的indexed列存。通过建立多级索引，来支持多维OLAP和点查询。支持物化视图。使用上建议根据列值特点来定义良好的索引维度，避免出现强distinct值带来的负面结果。与SPARK集成更平滑，但仍然要注意使用多种后端存储格式可能带来的工作量。
 
 ## MongoDb
